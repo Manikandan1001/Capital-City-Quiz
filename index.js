@@ -6,7 +6,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world",
-  password: "Mani10012002@",
+  password: "12345678",
   port: 5432,
 });
 
@@ -27,13 +27,11 @@ db.query("SELECT * FROM capitals", (err, res) => {
 
 let totalCorrect = 0;
 
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let currentQuestion = {};
 
-// GET home page
 app.get("/", async (req, res) => {
   totalCorrect = 0;
   await nextQuestion();
@@ -41,7 +39,6 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", { question: currentQuestion });
 });
 
-// POST a new post
 app.post("/submit", (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
